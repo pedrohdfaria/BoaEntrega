@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using POC.Controllers.Models;
+using POC.Exceptions;
 
 namespace POC.Controllers
 {
@@ -11,25 +11,45 @@ namespace POC.Controllers
     [ApiController]
     public class RoutesController : ControllerBase
     {
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<Route> Get(int id)
         {
-            return "value";
+            
+            var starting = new Coordinate(0, -id);
+            var destination = new Coordinate(0, id);
+            return new Route(starting, destination); ;
         }
 
-        // POST api/values
-        [HttpPost]
-        public ActionResult<string> Post([FromBody] Route route)
+        [HttpGet("{startingX}-{startingY}&{destinationX}-{destinationY}")]
+        public ActionResult<Route> GetRoute(float startingX, float startingY, float destinationX, float destinationY)
         {
-            return "Route Created";
+            try
+            {
+                var coordinates = new Coordinate[]
+                {
+                    new Coordinate(startingX, startingY),
+                    new Coordinate(destinationX, destinationY)
+                };
+
+                if (coordinates.Length < 2)
+                {
+                    throw new BoaEntregaException("A rota deve ter ao menos um ponto de partida e um ponto de chegada");
+                } 
+                var route = new Route(coordinates.First(), coordinates.Last());
+                return StatusCode((int)HttpStatusCode.OK, route);
+
+            }
+            catch(BoaEntregaException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode((int)HttpStatusCode.InternalServerError);
+            };
+
         }
 
     }
