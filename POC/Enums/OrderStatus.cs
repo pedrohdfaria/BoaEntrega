@@ -1,6 +1,6 @@
 ﻿namespace POC.Entities
 {
-    public enum StatusPedido
+    public enum OrderStatus
     {
         Pendente,
         AguardandoPagamento,
