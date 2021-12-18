@@ -2,8 +2,8 @@
 {
     public class Coordinate
     {
-        public float X { get; set; }
-        public float Y { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
 
         public Coordinate() { }
 

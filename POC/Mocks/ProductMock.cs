@@ -12,7 +12,7 @@ namespace POC.Mocks
 
             var randomProduct = new Faker<Product>(locale: "pt_BR")
                 .StrictMode(true)
-                .RuleFor(o => o.Name, f => f.Commerce.Product())
+                .RuleFor(o => o.Name, f => f.Commerce.Product() + " " + f.Name.LastName())
                 .RuleFor(o => o.Manufacturer, f => f.Company.CompanyName())
                 .RuleFor(o => o.Fragile, f => true)
                 .RuleFor(o => o.Size, f => f.PickRandom<Size>())
