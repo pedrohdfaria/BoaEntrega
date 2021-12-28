@@ -1,5 +1,4 @@
-﻿using POC.Entities;
-using Bogus;
+﻿using Bogus;
 using System;
 using POC.Controllers.Models;
 
