@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using POC.Controllers.Models;
 using POC.Entities;
+using POC.Exceptions;
+using System;
+using System.Net;
 
 namespace POC.Controllers
 {
@@ -8,12 +11,24 @@ namespace POC.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        // GET api/orders/5
         [HttpGet("{id}")]
         public ActionResult<Order> GetOrder(int id)
         {
-            Order order = new Order(id);
-            return order;
+            try
+            {
+                Order order = new Order(id);
+                return order;
+            }
+            catch (BoaEntregaException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode((int)HttpStatusCode.InternalServerError);
+            };
         }
+
     }
 }

@@ -11,7 +11,6 @@ namespace POC.Controllers
     [ApiController]
     public class RoutesController : ControllerBase
     {
-        // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<Route> Get(int id)
         {

@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using POC.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,6 +29,10 @@ namespace POC.Entities
         public async Task<byte[]> GetData(DateTime reference)
         {
             var currentReference = new DateTime(reference.Year, reference.Month, 1);
+            if (currentReference > DateTime.Now)
+            {
+                { throw new BoaEntregaException("Data de corte inválida"); }
+            }
 
             var file = File.OpenRead("Assets/Dados KPI.xlsx");
 
