@@ -54,8 +54,15 @@ namespace POC.Entities
                     while (excelWorksheet.Cells[i, 1].Value != null
                        && !string.IsNullOrEmpty(excelWorksheet.Cells[i, 1].ToString()))
                     {
-
                         var period = baseLine.AddDays(Int32.Parse(excelWorksheet.Cells[i, 1].Value.ToString())).Date;
+                        if (period > DateTime.Now.Date)
+                        {
+                            if (++i > totalRows)
+                            {
+                                break;
+                            }
+                            continue;
+                        };
                         if (period < currentReference) break;
                         Period.Add(period);
 

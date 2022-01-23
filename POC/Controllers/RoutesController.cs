@@ -14,13 +14,13 @@ namespace POC.Controllers
         [HttpGet("{id}")]
         public ActionResult<Route> Get(int id)
         {
-            
+            if (id > 180) id = id % 180;
             var starting = new Coordinate(0, -id);
             var destination = new Coordinate(0, id);
             return new Route(starting, destination); ;
         }
 
-        [HttpGet("{startingX}-{startingY}&{destinationX}-{destinationY}")]
+        [HttpGet("{startingX}&{startingY}/{destinationX}&{destinationY}")]
         public ActionResult<Route> GetRoute(float startingX, float startingY, float destinationX, float destinationY)
         {
             try
