@@ -4,6 +4,7 @@ using POC.Entities;
 using POC.Exceptions;
 using System;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace POC.Controllers
@@ -13,14 +14,12 @@ namespace POC.Controllers
     public class DataController : ControllerBase
     {
         [HttpGet("companyManagement")]
-        public async Task<ActionResult<FileResult>> GetOrder(DateTime reference)
+        public async Task<ActionResult<string>> GetOrder(DateTime reference)
         {
             try
             {
-                string fileName = "kpi.csv";
-                byte[] fileBytes = await new KeyProcessIndicator().GetData(reference);
-
-                return File(fileBytes, "text/csv", fileName);
+                string data = await new KeyProcessIndicator().GetData(reference);
+                return data;
             }
             catch (BoaEntregaException ex)
             {

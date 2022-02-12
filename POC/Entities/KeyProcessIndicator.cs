@@ -26,8 +26,9 @@ namespace POC.Entities
             Revenues = new List<double>();
         }
 
-        public async Task<byte[]> GetData(DateTime reference)
+        public async Task<string> GetData(DateTime reference)
         {
+            string retorno;
             var currentReference = new DateTime(reference.Year, reference.Month, 1);
             if (currentReference > DateTime.Now)
             {
@@ -50,6 +51,8 @@ namespace POC.Entities
                     int i = 2;
 
                     DateTime baseLine = new DateTime(1900, 01, 01);
+
+                    retorno = ",Entregas Realizadas,Entregas com Atraso,Tempo Médio Entrega (Dias),Municipios Atendidos,Faturamento\n";
 
                     while (excelWorksheet.Cells[i, 1].Value != null
                        && !string.IsNullOrEmpty(excelWorksheet.Cells[i, 1].ToString()))
@@ -80,17 +83,20 @@ namespace POC.Entities
 
                         var revenues = Double.Parse((excelWorksheet.Cells[i, 6].Value.ToString()));
                         Revenues.Add(revenues);
+                        string revenueString = revenues.ToString().Replace(",", ".");
 
-                        Console.WriteLine(period + " " + delivery +" " + lateDelivery + " " + middleTime + " " + cityQuantity + " " + revenues);
+                        retorno = retorno + period + "," + delivery +"," + lateDelivery + "," + middleTime + "," + cityQuantity + "," + revenueString + "\n";
 
                         if (++i > totalRows)
                         {
                             break;
                         }
                     }
+
+                    Console.Write(retorno);
                 }
 
-                return null;
+                return retorno;
             }
         }
     }
