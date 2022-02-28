@@ -65,7 +65,7 @@ namespace POC.Entities
                                 break;
                             }
                             continue;
-                        };
+                        }
                         if (period < currentReference) break;
                         Period.Add(period);
 
@@ -85,7 +85,7 @@ namespace POC.Entities
                         Revenues.Add(revenues);
                         string revenueString = revenues.ToString().Replace(",", ".");
 
-                        retorno = retorno + period + "," + delivery +"," + lateDelivery + "," + middleTime + "," + cityQuantity + "," + revenueString + "\n";
+                        retorno = retorno + period + "," + delivery + "," + lateDelivery + "," + middleTime + "," + cityQuantity + "," + revenueString + "\n";
 
                         if (++i > totalRows)
                         {
