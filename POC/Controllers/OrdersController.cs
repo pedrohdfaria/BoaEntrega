@@ -27,7 +27,7 @@ namespace POC.Controllers
             {
                 Console.WriteLine(ex);
                 return StatusCode((int)HttpStatusCode.InternalServerError);
-            };
+            }
         }
 
     }
