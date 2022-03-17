@@ -2,9 +2,9 @@
 using POC.Controllers.Models;
 using POC.Entities;
 using POC.Exceptions;
+using POC.Models;
 using System;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace POC.Controllers
@@ -14,12 +14,12 @@ namespace POC.Controllers
     public class DataController : ControllerBase
     {
         [HttpGet("companyManagement")]
-        public async Task<ActionResult<string>> GetOrder(DateTime reference)
+        public async Task<ActionResult<KpiDataModel>> GetData(DateTime reference)
         {
             try
             {
                 string data = await new KeyProcessIndicator().GetData(reference);
-                return data;
+                return new KpiDataModel() { Data = data };
             }
             catch (BoaEntregaException ex)
             {
@@ -29,8 +29,7 @@ namespace POC.Controllers
             {
                 Console.WriteLine(ex);
                 return StatusCode((int)HttpStatusCode.InternalServerError, "Um erro inesperado aconteceu");
-            };
-
+            }
         }
     }
 }
