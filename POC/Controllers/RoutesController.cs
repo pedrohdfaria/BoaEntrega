@@ -21,7 +21,7 @@ namespace POC.Controllers
         }
 
         [HttpGet("{startingX}&{startingY}/{destinationX}&{destinationY}")]
-        public ActionResult<Route> GetRoute(float startingX, float startingY, float destinationX, float destinationY)
+        public ActionResult<Route> GetRoute(decimal startingX, decimal startingY, decimal destinationX, decimal destinationY)
         {
             try
             {
@@ -47,8 +47,7 @@ namespace POC.Controllers
             {
                 Console.WriteLine(ex);
                 return StatusCode((int)HttpStatusCode.InternalServerError);
-            };
-
+            }
         }
 
     }

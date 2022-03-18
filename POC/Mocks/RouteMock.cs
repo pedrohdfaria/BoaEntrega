@@ -30,7 +30,7 @@ namespace POC.Mocks
 
         private static int getDistance(Coordinate starting, Coordinate destination)
         {
-            double distance = Math.Sqrt(Math.Pow(starting.X - destination.X, 2) + Math.Pow(starting.Y - destination.Y, 2));
+            double distance = Math.Sqrt(Math.Pow((double)(starting.X - destination.X), 2) + Math.Pow((double)(starting.Y - destination.Y), 2));
             return (int)Math.Ceiling(distance*0.1);
         }
 

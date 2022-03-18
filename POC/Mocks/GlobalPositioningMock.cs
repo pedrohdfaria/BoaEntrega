@@ -13,8 +13,8 @@ namespace POC.Mocks
 
             var randomCoordinate = new Faker<Coordinate>(locale: "pt_BR")
                 .StrictMode(true)
-                .RuleFor(o => o.X, f => f.Address.Latitude(-30, 0))
-                .RuleFor(o => o.Y, f => f.Address.Longitude(-60, -40));
+                .RuleFor(o => o.X, f => (decimal)f.Address.Latitude(-30, 0))
+                .RuleFor(o => o.Y, f => (decimal)f.Address.Longitude(-60, -40));
 
             return randomCoordinate.Generate();
         }
@@ -25,8 +25,8 @@ namespace POC.Mocks
 
             var randomCoordinate = new Faker<Coordinate>(locale: "pt_BR")
                 .StrictMode(true)
-                .RuleFor(o => o.X, f => f.Address.Latitude(-30, 0))
-                .RuleFor(o => o.Y, f => f.Address.Longitude(-60, -40));
+                .RuleFor(o => o.X, f => (decimal)f.Address.Latitude(-30, 0))
+                .RuleFor(o => o.Y, f => (decimal)f.Address.Longitude(-60, -40));
 
             return randomCoordinate.Generate();
         }

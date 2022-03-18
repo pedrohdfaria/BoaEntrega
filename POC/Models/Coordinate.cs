@@ -2,12 +2,12 @@
 {
     public class Coordinate
     {
-        public double X { get; set; }
-        public double Y { get; set; }
+        public decimal X { get; set; }
+        public decimal Y { get; set; }
 
         public Coordinate() { }
 
-        public Coordinate(float x, float y)
+        public Coordinate(decimal x, decimal y)
         {
             X = x;
             Y = y;
