@@ -11,14 +11,14 @@ namespace POC.Functions
 {
     public class DataFunction
     {
-        public async Task<APIGatewayProxyResponse> LambdaGet(APIGatewayProxyRequest newEvent)
+        public APIGatewayProxyResponse LambdaGet(APIGatewayProxyRequest newEvent)
         {
             newEvent.PathParameters.TryGetValue("reference", out string referenceString);
             DateTime reference = DateTime.Parse(referenceString);
 
             try
             {
-                string data = await new KeyProcessIndicator().GetData(reference);
+                string data = new KeyProcessIndicator().GetDataToFunction(reference);
                 var kpi = new KpiDataModel() { Data = data };
 
                 return new APIGatewayProxyResponse()
@@ -42,7 +42,7 @@ namespace POC.Functions
                 return new APIGatewayProxyResponse()
                 {
                     StatusCode = (int)HttpStatusCode.InternalServerError,
-                    Body = "Sorry, contact an admin"
+                    Body = ex.Message
                 };
             }
         }
