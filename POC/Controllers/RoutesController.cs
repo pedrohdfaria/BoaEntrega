@@ -20,8 +20,10 @@ namespace POC.Controllers
             return new Route(starting, destination); ;
         }
 
-        [HttpGet("{startingX}&{startingY}/{destinationX}&{destinationY}")]
-        public ActionResult<Route> GetRoute(decimal startingX, decimal startingY, decimal destinationX, decimal destinationY)
+        [HttpGet("coordinates")]
+        public ActionResult<Route> GetRoute([FromQuery]decimal startingX,
+            [FromQuery] decimal startingY, [FromQuery] decimal destinationX,
+            [FromQuery] decimal destinationY)
         {
             try
             {

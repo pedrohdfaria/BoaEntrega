@@ -13,7 +13,7 @@ namespace POC.Controllers
     [ApiController]
     public class DataController : ControllerBase
     {
-        [HttpGet("companyManagement")]
+        [HttpGet("companyManagement/{reference}")]
         public async Task<ActionResult<KpiDataModel>> GetData(DateTime reference)
         {
             try

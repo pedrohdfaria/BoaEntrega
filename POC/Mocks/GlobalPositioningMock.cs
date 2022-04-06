@@ -37,7 +37,7 @@ namespace POC.Mocks
             string y = coordinate.Y.ToString();
 
             string urlBase = "https://www.google.com/maps/search/?api=1&query=";
-            string url = urlBase + $"{x}.{y}".Replace(",", "&").Replace(".", ",").Replace("&", ".");
+            string url = urlBase + $"{x},{y}";
 
             return new Uri(url);
         }
